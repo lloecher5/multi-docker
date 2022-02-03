@@ -1,0 +1,39 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "lloecher5/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        
+        {
+            "name": "server",
+            "image": "lloecher5/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "lloecher5/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "lloecher5/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings" : [
+                {
+                    "hostPort":80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+
+        }
+
+    ]
+}
